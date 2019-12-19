@@ -154,9 +154,79 @@ void hw3_4(){
   printf("Элемент найден на %d месте (поиск с конца)\n", lineSearch(array, length, 73));
 }
 
+int getMin(int* a, int len){
+  int min;
+  if(len > 0) {
+    min = a[0];
+  }
+  else{
+    return -1;
+  }
+  for(int i = 1; i < len; i++){
+    if(a[i] < min){
+      min = a[i];
+    }
+  }
+  return min;
+}
+
+int getMax(int* a, int len){
+  int max;
+  if(len > 0) {
+    max = a[0];
+  }
+  else{
+    return -1;
+  }
+  for(int i = 1; i < len; i++){
+    if(a[i] > max){
+      max = a[i];
+    }
+  }
+  return max;
+}
+
+void fillArrayTo0(int* a, int len) {
+  int i;
+  for (i = 0; i < len; i++) {
+	a[i] = 0;
+  }
+}
+
+void sortPodschet(int* a, int len){
+  int min, max, count = 0;
+  min = getMin(a, len);
+  max = getMax(a, len);
+  int lengthOfNewArray = max - min + 1;
+  int newArray[lengthOfNewArray];
+  fillArrayTo0(newArray, lengthOfNewArray);
+  
+   for(int i = 0; i < len; i++){
+     count++;
+     newArray[a[i] - min] += 1;
+   }
+   int numberOfValue = 0;
+   for(int i = 0; i < lengthOfNewArray; i++){
+     int countOfValue = newArray[i];
+     for(int j = 0; j < countOfValue; j++){
+       count++;
+       a[numberOfValue] = i + min;
+       numberOfValue++;
+     }
+   }
+
+   printf("Сортировка подсчетом прошла за %d итераций\n", count);
+}
+
 void hw3_5(){
   //5. Реализовать сортировку подсчётом (Алгоритм со списком)
   printf("Сортировка подсчетом\n");
 
-  //
+  printf("Исходный массив\n");
+  int length = 256;
+  int array[length];
+  fillArray(array, length);
+  printArray(array, length);
+  sortPodschet(array, length);
+  printArray(array, length);
 }
