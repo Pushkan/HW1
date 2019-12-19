@@ -74,7 +74,21 @@ void hw2_2_b(){
   printf("%d\n", toPowRec(value, power));
 }
 
+int routes(int from, int to) {
+  if(from > to){
+    return 0;
+  }
+  else if(from == to){
+    return 1;
+  }
+  else{
+    return routes(from + 1, to) + routes(from * 2, to);
+  }
+}
+
 void hw2_3(){
   //3. * Программа преобразует целое число. У программы две команды: Прибавь 1, Умножь на 2; Сколько существует путей для данной программы, которые число 3 преобразуют в число 20? Решить с использованием рекурсии.
+  printf("Количество путей от 3 до 20\n");
 
+  printf("%d", routes(3, 20));
 }
